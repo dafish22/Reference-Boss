@@ -1,76 +1,58 @@
-<?PHP
-    // DB account data
-    $servername = "localhost";
-    $username = "rfbadmin";
-    $password = "password";
-    $dbname = "referenceboss";
-
-    // Error string
-    $errorText = null;
-
-    //DB connection object to MySQL
-    $connection = new mysqli($servername,$username,$password.$dbname);
-
-    // DB connection test
-    if ($connection->connect_error) {
-        $errorText = $connection->connect_error;
-    }
-
-    // Check form submission
-    if(isset($_POST['description']) === true) {
-        // SQL statment for 'create new task'
-        $sql = "INSERT INTO tasks (description, who) VALUES ('" . $_POST['description'] . "', '" . $_POST['who'] . "'";
-
-        // Run SQL Form Submit
-        if (!$connection->query($sql)) {
-            $errorText = "Failed to Create Record.";
-        }
-    }
-
-    // Toggle completed
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $completed = ($_GET['completed'])? 0 : 1;
-
-        $sql = "UPDATE tasks SET completed=" . $completed . " WHERE id=" . $id;
-
-        // Run SQL Complete
-        if (!$connection->query($sql)) {
-            $errorText = "Failed to Update Record ID:" . $id;
-        }
-    }
-
-    // Get all recorded tasks (Newest -> Oldest)
-    $alltasks = $connection->query("SELECT * from tasks ORDER BY created DESC");
-
-    // Destroy connection object
-    $connection->close();
-?> 
-
-
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title><a href="Index.html">Home</a></title>
-    </head>
+    
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="container" style="max-width: 50%;">
+        <div class="text-center mt-5 mb-4">
+            <h2>Search Bar Test</h2>
+        </div>
+        <input type="text" class="form-control" id="liveSearch" autocomplete="off" placeholder="Search...">
+    </div>
 
-    <body>
-        <h1>Welcome!</h1>
+    <div id="searchResult"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", (e) => {
 
-        <?PHP if ($errorText != null) { ?> 
-            <div><?= $errorText; ?></div>
-        <?PHP } ?>
+            const livesearch = document.querySelector("#liveSearch");
+            livesearch.addEventListener("click", (ec) => {
+                let aj = new XMLHttpRequest();
+                
 
-        <h3>Test</h3>
-        <form action="index.php" method="post">
-            <input type="text" name="description" id="description" required placeholder="Task description"/>
-            <input type="text" name="who" required placeholder="Who is the task assigned to"/>
+            }); 
 
-            <input type="submit" value="Add Task"/>
-        </form>
-    </body>
+        });
 
-    <footer>
-        <p>&copy;2025</p>
-    </footer>
+
+
+
+        $(document).ready(function() {
+
+
+            
+
+
+            $("#liveSearch").keyup(function() {
+                var input = $(this).val();
+
+                if (input != "") {
+                    $.ajax({
+                        url: "liveSearch.php",
+                        method: "POST",
+                        data: { input: input },
+                        success: function(data) {
+                            $("#searchResult").html(data);
+                        }
+                    });
+                } else {
+                    $("#searchResult").css("display","none");
+                }
+            });
+        });
+    </script>
+</body>
 </html>
