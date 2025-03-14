@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css">
 </head>
 <body>
-    <div class="container" style="max-width: 50%;">
+    <div class="container" style="margin-top: 50px;">
+        <h2 align="center" style="margin-bottom: 20px"></h2>
         <div class="text-center mt-5 mb-4">
-            <h2>Search Bar Test</h2>
+            <h3>Search Bar Test</h3>
         </div>
         <input type="text" class="form-control" id="liveSearch" autocomplete="off" placeholder="Search...">
     </div>
