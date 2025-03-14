@@ -14,8 +14,8 @@ if(count($result) > 0){
             <td>'.$row->refnum.'</td>
             <td>'.$row->author.'</td>
             <td>'.$row->title.'</td>
-            <td>'.$row->publisher.'</td>
             <td>'.$row->publication_date.'</td>
+            <td>'.$row->publisher.'</td>
             <td>'.$row->place_of_publication.'</td>
             <td>'.$row->isbn.'</td>
         </tr>

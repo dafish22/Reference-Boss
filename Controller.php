@@ -29,7 +29,7 @@ if(isset($_POST["action"])){
         //curl_close($client);
 
 
-        $sql = 'INSERT into tblbooks (refnum,authors,title,publicationDate,publisher,publicationPlace,isbn) VALUES (' . $_POST["refnum"] . ',"' . $_POST["author"] . '","' . $_POST["title"] . '","' .  $_POST["publisher"] . '","' . $_POST["publication_date"] . '","' . $_POST["place_of_publication"] . '","' . $_POST["isbn"] . '")';
+        $sql = 'INSERT into tblbooks (refnum,authors,title,publicationDate,publisher,publicationPlace,isbn) VALUES (' . $_POST["refnum"] . ',"' . $_POST["author"] . '","' . $_POST["title"] . '","' .  $_POST["publication_date"] . '","' . $_POST["publisher"] . '","' . $_POST["place_of_publication"] . '","' . $_POST["isbn"] . '")';
 
 
         echo($sql);
